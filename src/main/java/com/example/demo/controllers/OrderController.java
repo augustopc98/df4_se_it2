@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.*;
+import com.example.demo.models.CustomerOrder;
+import com.example.demo.models.Discount;
+import com.example.demo.models.Payment;
 import com.example.demo.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,5 +24,15 @@ public class OrderController {
         orderService.createOrder(order);
     }
 
-    // Additional endpoints for add/remove items, process payment, etc.
+    // Endpoint to handle adding a payment to an order
+    @PostMapping("/{orderId}/payments")
+    public void addPaymentToOrder(@PathVariable Long orderId, @RequestBody Payment payment) {
+        orderService.processOrderPayment(orderId, payment);
+    }
+
+    // Endpoint to apply a discount to an order
+    @PutMapping("/{orderId}/discount")
+    public void applyDiscountToOrder(@PathVariable Long orderId, @RequestBody Discount discount) {
+        orderService.applyOrderDiscount(orderId, discount);
+    }
 }

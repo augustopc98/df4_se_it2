@@ -26,4 +26,9 @@ public class CustomerController {
     public void updateCustomerEmail(@PathVariable Long id, @RequestParam String email) {
         customerService.updateCustomerEmail(id, email);
     }
+
+    @PostMapping
+    public Customer createCustomer(@RequestBody Customer customer) {
+        return customerService.createCustomer(customer);
+    }
 }

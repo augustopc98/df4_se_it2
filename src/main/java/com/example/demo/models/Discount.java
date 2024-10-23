@@ -8,10 +8,22 @@ import java.util.Date;
 @Entity
 public class Discount {
     @Id
-    private Long paymentId;
-    private BigDecimal amount;
-    private Date paymentDate;
-    private String paymentStatus;
+    private Long discountId;
+    private BigDecimal discountPercentage;
+    private String discountDescription;
 
+
+    public Discount(Long discountId, BigDecimal discountPercentage, String discountDescription) {
+        this.discountId = discountId;
+        this.discountPercentage = discountPercentage;
+        this.discountDescription = discountDescription;
+    }
+
+    public Discount() {
+    }
+
+    public BigDecimal applyDiscount(BigDecimal totalAmount) {
+        return totalAmount.subtract(totalAmount.multiply(discountPercentage));
+    }
     // Constructors, Getters and Setters
 }
